@@ -1,0 +1,10 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "script"
+    }
+}

@@ -1,0 +1,20 @@
+@import 'base';
+
+@import 'keyboard';
+
+.scale-list {
+  display: flex;
+  margin: 90px 50px;
+  justify-content: space-around;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #777;
+}
+
+.highlighted {
+  background-color: rgb(213, 255, 238);
+}

@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+body {
+  color: #444;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px; }
+
+h1 {
+  text-align: center;
+  padding: 40px 0; }
+
+.keyboard {
+  height: 200px;
+  width: 840px;
+  margin: auto;
+  display: flex;
+  overflow-x: hidden;
+  border-top: 10px solid #222;
+  border-radius: 5px;
+  /* Makes keyboard scrollable under a certain view width */ }
+  @media only screen and (max-width: 1146px) {
+    .keyboard {
+      overflow-x: scroll;
+      width: 73.3%;
+      height: 213px;
+      border-right: 1px solid #444; } }
+  .keyboard__octave {
+    display: flex; }
+  .keyboard__key {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; }
+    .keyboard__key--white {
+      border: 1px solid #444;
+      background: #fefefe;
+      height: 100%;
+      width: 40px;
+      float: left; }
+      .keyboard__key--white:hover {
+        background: #c5ffd6;
+        cursor: pointer; }
+    .keyboard__key--black {
+      height: 65%;
+      width: 20px;
+      left: -10px;
+      position: absolute;
+      z-index: 1;
+      background: #202229;
+      box-shadow: 0px 1px 2px 0px rgba(182, 182, 182, 0.7); }
+      .keyboard__key--black:hover {
+        background: #407c52; }
+  .keyboard__black-key-anchor {
+    position: relative; }
+  .keyboard__key-name {
+    font-size: 0.8rem;
+    padding-top: 10px; }
+    .keyboard__key-name--left-align {
+      margin-right: 10px; }
+    .keyboard__key-name--right-align {
+      margin-left: 10px; }
+    .keyboard__key-name--black-key {
+      color: white;
+      font-size: 0.6rem;
+      padding-top: 14px; }
+  .keyboard__octave-marker {
+    padding-bottom: 10px;
+    font-size: 0.8rem; }
+
+.scale-list {
+  display: flex;
+  margin: 90px 50px;
+  justify-content: space-around; }
+
+.btn {
+  padding: 10px 20px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #777; }
+
+.highlighted {
+  background-color: #d5ffee; }

@@ -1,0 +1,99 @@
+@import 'colors';
+
+.keyboard {
+
+  $base-height: 200px;
+  $base-width: 840px;
+  $white-key-width: 40px;
+  $black-key-width: 20px;
+  $black-key-height-ratio: 65%;
+
+  height: $base-height;
+  width: $base-width;
+  margin: auto;
+  display: flex;
+  overflow-x: hidden;
+
+  border: {
+    top: 10px solid $keyboard__top-border;
+    radius: 5px;
+  }
+
+  /* Makes keyboard scrollable under a certain view width */
+  @media only screen and (max-width: 1146px) {
+    overflow-x: scroll;
+    width: 73.3%;
+    height: $base-height + 13px;
+    border-right: 1px solid $base-black;
+  }
+
+  &__octave {
+    display: flex;
+  }
+
+  &__key {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    &--white {
+      border: 1px solid $base-black;
+      background: $keyboard__base-white;
+      height: 100%;
+      width: $white-key-width;
+      float: left;
+
+      &:hover {
+        background: $keyboard__base-white--hover;
+        cursor: pointer;
+      }
+    }
+
+    &--black {
+      height: $black-key-height-ratio;
+      width: $black-key-width;
+      left: $black-key-width / 2 * -1;
+      position: absolute;
+      z-index: 1;
+      background: $keyboard__base-black;
+      box-shadow: 0px 1px 2px 0px rgba(182, 182, 182, 0.7);
+
+      &:hover {
+        background: $keyboard__base-black--hover;
+      }
+    }
+  }
+
+  &__black-key-anchor {
+    position: relative;
+  }
+
+  &__key-name {
+    font-size: 0.8rem;
+    padding-top: 10px;
+
+    &--left-align {
+      margin-right: 10px;
+    }
+
+    &--right-align {
+      margin-left: 10px;
+    }
+
+    &--black-key {
+      color: white;
+      font-size: 0.6rem;
+      padding-top: 14px;
+    }
+  }
+
+  &__octave-marker {
+    padding-bottom: 10px;
+    font-size: 0.8rem;
+  }
+}
