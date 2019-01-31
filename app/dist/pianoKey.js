@@ -6,25 +6,24 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Key =
+var PianoKey =
 /*#__PURE__*/
 function () {
-  function Key(domID, name, octave) {
-    _classCallCheck(this, Key);
+  function PianoKey(domID) {
+    _classCallCheck(this, PianoKey);
 
-    this.key = document.getElementById(domID);
-    this.name = name;
-    this.octave = octave;
+    this.domNode = document.getElementById(domID);
+    this.pianoKeyName = domID;
   }
 
-  _createClass(Key, [{
+  _createClass(PianoKey, [{
     key: "toggleHighlighted",
     value: function toggleHighlighted() {
-      this.key.classList.toggle('highlighted');
+      this.domNode.classList.toggle('highlighted');
     }
   }]);
 
-  return Key;
+  return PianoKey;
 }();
 
-module.exports = Key;
+module.exports = PianoKey;

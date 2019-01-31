@@ -22,7 +22,7 @@ gulp.task('babel', async () => {
 
 gulp.task('browserify', async () => {
   browserify({
-    entries: ['app/dist/index.js', 'app/dist/key.js'],
+    entries: ['app/dist/index.js'],
     debug: true,
   })
     .bundle()
