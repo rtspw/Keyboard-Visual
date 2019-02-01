@@ -20,9 +20,9 @@
   }
 
   /* Makes keyboard scrollable under a certain view width */
-  @media only screen and (max-width: 1146px) {
+  @media only screen and (max-width: 942px) {
     overflow-x: scroll;
-    width: 73.3%;
+    width: 90%;
     height: $base-height + 13px;
     border-right: 1px solid $base-black;
   }
@@ -65,6 +65,7 @@
 
       &:hover {
         background: $keyboard__base-black--hover;
+        cursor: pointer;
       }
     }
   }
@@ -91,9 +92,26 @@
       padding-top: 14px;
     }
   }
+  
+  &__text-area {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+  }
 
   &__octave-marker {
-    padding-bottom: 10px;
-    font-size: 0.8rem;
+    color: rgb(185, 185, 185);
   }
+
+  &__fingering {
+    font-size: 0.85rem;
+  }
+}
+
+.piano-key-highlight--white {
+  background-color: $keyboard__highlight-white;
+}
+
+.piano-key-highlight--black {
+  background-color: $keyboard__highlight-black;
 }

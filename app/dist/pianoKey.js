@@ -6,6 +6,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function determineColor(name) {
+  return name.indexOf('sharp') !== -1 ? 'black' : 'white';
+}
+
 var PianoKey =
 /*#__PURE__*/
 function () {
@@ -13,13 +17,18 @@ function () {
     _classCallCheck(this, PianoKey);
 
     this.domNode = document.getElementById(domID);
-    this.pianoKeyName = domID;
+    this.id = domID;
+    this.color = determineColor(domID);
   }
 
   _createClass(PianoKey, [{
     key: "toggleHighlighted",
     value: function toggleHighlighted() {
-      this.domNode.classList.toggle('highlighted');
+      if (this.color === 'white') {
+        this.domNode.classList.toggle('piano-key-highlight--white');
+      } else {
+        this.domNode.classList.toggle('piano-key-highlight--black');
+      }
     }
   }]);
 

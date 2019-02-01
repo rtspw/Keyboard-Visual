@@ -2,7 +2,7 @@
 /**
  * @param {number} start
  * @param {number} end This number is included
- * @returns {number[]} 
+ * @returns {number[]}
  */
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
