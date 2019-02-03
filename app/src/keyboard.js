@@ -17,7 +17,7 @@ function generateKeyNameIDs() {
   return keyNamesWithOctaves;
 }
 
-function getPianoKeyNodesWithIDs(keyNameIDs = []) {
+function getPianoKeyNodesUsingIDs(keyNameIDs = []) {
   const pianoKeyNodes = [];
   keyNameIDs.forEach((id) => {
     const pianoKey = new PianoKey(id);
@@ -28,13 +28,20 @@ function getPianoKeyNodesWithIDs(keyNameIDs = []) {
 
 function getPianoKeyNodes() {
   const keyNameIDs = generateKeyNameIDs();
-  const pianoKeyNodes = getPianoKeyNodesWithIDs(keyNameIDs);
+  const pianoKeyNodes = getPianoKeyNodesUsingIDs(keyNameIDs);
   return pianoKeyNodes;
 }
 
 class Keyboard {
   constructor() {
     this.keyNodes = getPianoKeyNodes();
+    console.log(this.keyNodes);
+  }
+
+  test() {
+    this.keyNodes.forEach((key) => {
+      key.setDisplayNameOfType('specialCSharpM');
+    });
   }
 }
 

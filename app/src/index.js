@@ -3,3 +3,5 @@
 const Keyboard = require('./keyboard');
 
 const test = new Keyboard();
+
+test.test();
