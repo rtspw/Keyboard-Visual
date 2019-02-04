@@ -1,6 +1,9 @@
 'use strict';
 
-const gulp = require('gulp');
+const {
+  src, dest, series, watch,
+} = require('gulp');
+
 const sass = require('gulp-sass');
 const babel = require('gulp-babel');
 
@@ -8,31 +11,33 @@ const browserify = require('browserify');
 const vinylSourceStream = require('vinyl-source-stream');
 const vinylBuffer = require('vinyl-buffer');
 
-gulp.task('sass', async () => {
-  gulp.src('app/scss/main.scss')
+async function transpileSass() {
+  src('app/scss/main.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('app/css'));
-});
+    .pipe(dest('app/css'));
+}
 
-gulp.task('babel', async () => {
-  gulp.src('app/src/*.js')
+async function transpileBabel() {
+  src('app/src/*.js')
     .pipe(babel())
-    .pipe(gulp.dest('app/dist'));
-});
+    .pipe(dest('app/dist'));
+}
 
-gulp.task('browserify', async () => {
+async function bundle() {
   browserify({
     entries: ['app/dist/index.js'],
     debug: true,
-  })
-    .bundle()
+  }).bundle()
     .pipe(vinylSourceStream('bundle.js'))
     .pipe(vinylBuffer())
-    .pipe(gulp.dest('app'));
-});
+    .pipe(dest('app'));
+}
 
-gulp.task('watch', async () => {
-  gulp.watch('app/scss/*.scss', gulp.series('sass'));
-  gulp.watch('app/src/*.js', gulp.series('babel'));
-  gulp.watch('app/dist/*.js', gulp.series('browserify'));
-});
+async function watchFiles() {
+  watch('app/scss/*.scss', series('sass'));
+  watch('app/src/*.js', series('babel', 'browserify'));
+}
+
+exports.sass = transpileSass;
+exports.js = series(transpileBabel, bundle);
+exports.default = watchFiles;

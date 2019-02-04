@@ -8,6 +8,7 @@
         "sourceType": "script"
     },
     "rules": {
-        "quote-props": "off"
+        "quote-props": "off",
+        "linebreak-style": "off"
     }
 }
