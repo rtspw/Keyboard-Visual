@@ -16,7 +16,6 @@
 
   border: {
     top: 10px solid $keyboard__top-border;
-    right: 1px solid $base-black;
     radius: 5px;
   }
 
@@ -32,8 +31,8 @@
   }
 
   &__key {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
     
     display: flex;
     flex-shrink: 0;
@@ -45,8 +44,11 @@
     cursor: pointer;
 
     &--white {
-      border-bottom: 1px solid $base-black;
-      border-left: 1px solid $base-black;
+      border: {
+        bottom: 5px solid $keyboard__key-border-bottom--white;
+        left: 2px solid $keyboard__key-border-left--white;
+        right: 2px solid $keyboard__key-border-right--white;
+      }
       height: 100%;
       width: $white-key-width;
       float: left;
@@ -55,12 +57,16 @@
     }
 
     &--black {
+      border: {
+        bottom: 5px solid $keyboard__key-border-bottom--black;
+        left: 2px solid $keyboard__key-border-left--black;
+        right: 2px solid $keyboard__key-border-right--black;
+      }
       height: $black-key-height-ratio;
       width: $black-key-width;
       left: $black-key-width / 2 * -1;
       position: absolute;
       z-index: 1;
-      border-bottom: 2px solid rgba(54, 55, 58, 0.5);
       background: $keyboard__base-black;
       background: linear-gradient(130deg, $keyboard__base-black 0%, rgba(53,53,55,1) 50%, $keyboard__base-black 100%);
       box-shadow: 0px 1px 2px 0px rgba(182, 182, 182, 0.7);

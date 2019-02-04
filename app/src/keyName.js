@@ -43,7 +43,6 @@ function getAliases(keyID) {
 class KeyName {
   constructor(baseName) {
     this.id = determineKeyID(baseName);
-    this.alises = getAliases(this.id);
   }
 
   getAliasOfType(type) {

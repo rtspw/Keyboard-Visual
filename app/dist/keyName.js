@@ -56,7 +56,6 @@ function () {
     _classCallCheck(this, KeyName);
 
     this.id = determineKeyID(baseName);
-    this.alises = getAliases(this.id);
   }
 
   _createClass(KeyName, [{

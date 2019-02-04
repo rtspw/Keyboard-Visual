@@ -55,6 +55,9 @@ function () {
     value: function test() {
       this.keyNodes.forEach(function (key) {
         key.setDisplayNameOfType('specialCSharpM');
+        setTimeout(function () {
+          key.setDisplayNameOfType('shar');
+        }, 3000);
       });
     }
   }]);

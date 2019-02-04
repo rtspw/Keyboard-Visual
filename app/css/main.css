@@ -20,7 +20,6 @@ h1 {
   display: flex;
   overflow-x: hidden;
   border-top: 10px solid #222;
-  border-right: 1px solid #444;
   border-radius: 5px;
   /* Makes keyboard scrollable under a certain view width */ }
   @media only screen and (max-width: 930px) {
@@ -31,8 +30,8 @@ h1 {
   .keyboard__octave {
     display: flex; }
   .keyboard__key {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
@@ -41,20 +40,23 @@ h1 {
     transition: background .1s linear;
     cursor: pointer; }
     .keyboard__key--white {
-      border-bottom: 1px solid #444;
-      border-left: 1px solid #444;
+      border-bottom: 5px solid #dfdfdf;
+      border-left: 2px solid #f0f0f0;
+      border-right: 2px solid #c5c5c5;
       height: 100%;
       width: 40px;
       float: left;
       background: #fefefe;
       background: linear-gradient(180deg, rgba(133, 133, 133, 0.35) 0%, #f2f3f5 2%, #fefefe 100%); }
     .keyboard__key--black {
+      border-bottom: 5px solid rgba(54, 55, 58, 0.4);
+      border-left: 2px solid rgba(110, 110, 110, 0.4);
+      border-right: 2px solid rgba(35, 35, 37, 0.5);
       height: 65%;
       width: 20px;
       left: -10px;
       position: absolute;
       z-index: 1;
-      border-bottom: 2px solid rgba(54, 55, 58, 0.5);
       background: #202229;
       background: linear-gradient(130deg, #202229 0%, #353537 50%, #202229 100%);
       box-shadow: 0px 1px 2px 0px rgba(182, 182, 182, 0.7); }
