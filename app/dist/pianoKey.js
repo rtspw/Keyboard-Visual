@@ -36,11 +36,9 @@ function () {
   _createClass(PianoKey, [{
     key: "toggleHighlighted",
     value: function toggleHighlighted() {
-      if (this.color === 'white') {
-        this.domNode.classList.toggle('piano-key-highlight--white');
-      } else {
-        this.domNode.classList.toggle('piano-key-highlight--black');
-      }
+      var highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+      console.log(highlightClassName);
+      this.domNode.classList.toggle(highlightClassName);
     }
   }, {
     key: "setCustomDisplayName",
@@ -57,7 +55,7 @@ function () {
     key: "setStandardDisplayName",
     value: function setStandardDisplayName() {
       // TODO
-      return this;
+      this.toggleHighlighted();
     }
   }]);
 

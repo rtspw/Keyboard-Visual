@@ -32,6 +32,7 @@ function getPianoKeyNodes() {
   return pianoKeyNodes;
 }
 
+
 class Keyboard {
   constructor() {
     this.keyNodes = getPianoKeyNodes();
@@ -42,6 +43,7 @@ class Keyboard {
     this.keyNodes.forEach((key) => {
       key.setDisplayNameOfType('specialCSharpM');
       setTimeout(() => { key.setDisplayNameOfType('shar'); }, 3000);
+      key.setStandardDisplayName();
     });
   }
 }

@@ -41,11 +41,11 @@ h1 {
     cursor: pointer; }
     .keyboard__key--white {
       border-bottom: 5px solid #dfdfdf;
-      border-left: 2px solid #f0f0f0;
+      border-left: 2px solid rgba(240, 240, 240, 0.3);
       border-right: 2px solid #c5c5c5;
       height: 100%;
       width: 40px;
-      float: left;
+      position: relative;
       background: #fefefe;
       background: linear-gradient(180deg, rgba(133, 133, 133, 0.35) 0%, #f2f3f5 2%, #fefefe 100%); }
     .keyboard__key--black {
@@ -88,7 +88,7 @@ h1 {
       color: #fefefe; }
 
 .piano-key-highlight--white {
-  background-color: #e2f2f3; }
+  background-color: #e2f2f3 !important; }
 
 .piano-key-highlight--black {
   background-color: #446063; }

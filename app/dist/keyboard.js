@@ -58,6 +58,7 @@ function () {
         setTimeout(function () {
           key.setDisplayNameOfType('shar');
         }, 3000);
+        key.setStandardDisplayName();
       });
     }
   }]);

@@ -13,6 +13,7 @@ function determineNames(domID) {
   return keyName;
 }
 
+
 class PianoKey {
   constructor(domID) {
     this.names = determineNames(domID);
@@ -24,11 +25,9 @@ class PianoKey {
   }
 
   toggleHighlighted() {
-    if (this.color === 'white') {
-      this.domNode.classList.toggle('piano-key-highlight--white');
-    } else {
-      this.domNode.classList.toggle('piano-key-highlight--black');
-    }
+    const highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+    console.log(highlightClassName);
+    this.domNode.classList.toggle(highlightClassName);
   }
 
   setCustomDisplayName(name) {
@@ -42,7 +41,7 @@ class PianoKey {
 
   setStandardDisplayName() {
     // TODO
-    return this;
+    this.toggleHighlighted();
   }
 }
 

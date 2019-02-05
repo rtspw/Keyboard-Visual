@@ -51,7 +51,7 @@
       }
       height: 100%;
       width: $white-key-width;
-      float: left;
+      position: relative;
       background: $keyboard__base-white;
       background: linear-gradient(180deg, rgba(133, 133, 133, 0.35) 0%, rgb(242, 243, 245) 2%, $keyboard__base-white 100%); 
     }
@@ -118,9 +118,9 @@
 }
 
 .piano-key-highlight--white {
-  background-color: $keyboard__highlight-white;
+  background-color: $keyboard__highlight--white !important;
 }
 
 .piano-key-highlight--black {
-  background-color: $keyboard__highlight-black;
+  background-color: $keyboard__highlight--black;
 }

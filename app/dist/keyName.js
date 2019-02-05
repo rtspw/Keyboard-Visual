@@ -31,22 +31,20 @@ var nameToIDEnum = Object.freeze({
 
 function determineKeyID(baseName) {
   var id = nameToIDEnum[baseName];
-
-  if (id === undefined) {
-    return -1;
-  }
-
+  if (id === undefined) return -1;
   return id;
 }
 
-function getAliases(keyID) {
-  var aliases = idToAlisesDict[keyID];
+function getKeyNameSet(type) {
+  var keyNameSet = keyNameSets[type];
+  if (keyNameSet === undefined) return '';
+  return keyNameSet;
+}
 
-  if (aliases === undefined) {
-    return {};
-  }
-
-  return aliases;
+function getAliasOfSpecificType(keyNameSet, keyID) {
+  var aliasOfSpecificType = keyNameSet[keyID];
+  if (aliasOfSpecificType === undefined) return '';
+  return aliasOfSpecificType;
 }
 
 var KeyName =
@@ -61,17 +59,8 @@ function () {
   _createClass(KeyName, [{
     key: "getAliasOfType",
     value: function getAliasOfType(type) {
-      if (keyNameSets[type] === undefined) {
-        return '';
-      }
-
-      var keyNameSet = keyNameSets[type];
-      var aliasOfSpecificType = keyNameSet[this.id];
-
-      if (aliasOfSpecificType === undefined) {
-        return '';
-      }
-
+      var keyNameSet = getKeyNameSet(type);
+      var aliasOfSpecificType = getAliasOfSpecificType(keyNameSet, this.id);
       return aliasOfSpecificType;
     }
   }]);

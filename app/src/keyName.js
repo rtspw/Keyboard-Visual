@@ -26,19 +26,22 @@ const nameToIDEnum = Object.freeze({
 
 function determineKeyID(baseName) {
   const id = nameToIDEnum[baseName];
-  if (id === undefined) {
-    return -1;
-  }
+  if (id === undefined) return -1;
   return id;
 }
 
-function getAliases(keyID) {
-  const aliases = idToAlisesDict[keyID];
-  if (aliases === undefined) {
-    return {};
-  }
-  return aliases;
+function getKeyNameSet(type) {
+  const keyNameSet = keyNameSets[type];
+  if (keyNameSet === undefined) return '';
+  return keyNameSet;
 }
+
+function getAliasOfSpecificType(keyNameSet, keyID) {
+  const aliasOfSpecificType = keyNameSet[keyID];
+  if (aliasOfSpecificType === undefined) return '';
+  return aliasOfSpecificType;
+}
+
 
 class KeyName {
   constructor(baseName) {
@@ -46,14 +49,8 @@ class KeyName {
   }
 
   getAliasOfType(type) {
-    if (keyNameSets[type] === undefined) {
-      return '';
-    }
-    const keyNameSet = keyNameSets[type];
-    const aliasOfSpecificType = keyNameSet[this.id];
-    if (aliasOfSpecificType === undefined) {
-      return '';
-    }
+    const keyNameSet = getKeyNameSet(type);
+    const aliasOfSpecificType = getAliasOfSpecificType(keyNameSet, this.id);
     return aliasOfSpecificType;
   }
 }

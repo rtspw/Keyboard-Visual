@@ -35,7 +35,7 @@ async function bundle() {
 
 async function watchFiles() {
   watch('app/scss/*.scss', series('sass'));
-  watch('app/src/*.js', series('babel', 'browserify'));
+  watch('app/src/*.js', series(transpileBabel, bundle));
 }
 
 exports.sass = transpileSass;
