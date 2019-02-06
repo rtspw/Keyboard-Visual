@@ -14,19 +14,21 @@ h1 {
   padding: 40px 0; }
 
 .keyboard {
-  height: 225px;
   width: 840px;
   margin: auto;
-  display: flex;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
   border-top: 10px solid #222;
   border-radius: 5px;
   /* Makes keyboard scrollable under a certain view width */ }
+  .keyboard__container {
+    height: 225px;
+    display: flex; }
   @media only screen and (max-width: 930px) {
     .keyboard {
       overflow-x: scroll;
-      width: 90%;
-      height: 238px; } }
+      width: 90%; } }
   .keyboard__octave {
     display: flex; }
   .keyboard__key {
@@ -37,13 +39,13 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    transition: background .1s linear;
+    transition: border-bottom-width 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
     cursor: pointer; }
     .keyboard__key--white {
       border-bottom: 5px solid #dfdfdf;
       border-left: 2px solid rgba(240, 240, 240, 0.3);
       border-right: 2px solid #c5c5c5;
-      height: 100%;
+      height: 225px;
       width: 40px;
       position: relative;
       background: #fefefe;
@@ -88,10 +90,16 @@ h1 {
       color: #fefefe; }
 
 .piano-key-highlight--white {
-  background-color: #e2f2f3 !important; }
+  background: #cdfcdb;
+  border-bottom-width: 2px; }
 
 .piano-key-highlight--black {
-  background-color: #446063; }
+  background: #2f7443;
+  border-bottom-width: 2px; }
+
+.degree-display {
+  height: 50px;
+  padding: 10px 0; }
 
 .scale-list {
   display: flex;

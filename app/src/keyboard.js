@@ -41,9 +41,7 @@ class Keyboard {
 
   test() {
     this.keyNodes.forEach((key) => {
-      key.setDisplayNameOfType('specialCSharpM');
-      setTimeout(() => { key.setDisplayNameOfType('shar'); }, 3000);
-      key.setStandardDisplayName();
+      key.setDisplayNameOfType('');
     });
   }
 }

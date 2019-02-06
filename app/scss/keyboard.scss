@@ -1,29 +1,36 @@
 @import 'colors';
 
+$base-keyboard-height: 225px;
+$base-width: 840px;
+$white-key-width: 40px;
+$black-key-width: 20px;
+$black-key-height-ratio: 65%;
+
+$degree-display-height: 50px;
+
 .keyboard {
 
-  $base-height: 225px;
-  $base-width: 840px;
-  $white-key-width: 40px;
-  $black-key-width: 20px;
-  $black-key-height-ratio: 65%;
-
-  height: $base-height;
   width: $base-width;
   margin: auto;
-  display: flex;
   overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
 
   border: {
     top: 10px solid $keyboard__top-border;
     radius: 5px;
   }
 
+  &__container {
+    height: $base-keyboard-height;
+    display: flex;
+  }
+
   /* Makes keyboard scrollable under a certain view width */
   @media only screen and (max-width: 930px) {
     overflow-x: scroll;
     width: 90%;
-    height: $base-height + 13px;
   }
 
   &__octave {
@@ -39,8 +46,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    transition: border-bottom-width 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
 
-    transition: background .1s linear;
     cursor: pointer;
 
     &--white {
@@ -49,7 +56,7 @@
         left: 2px solid $keyboard__key-border-left--white;
         right: 2px solid $keyboard__key-border-right--white;
       }
-      height: 100%;
+      height: $base-keyboard-height;
       width: $white-key-width;
       position: relative;
       background: $keyboard__base-white;
@@ -118,9 +125,16 @@
 }
 
 .piano-key-highlight--white {
-  background-color: $keyboard__highlight--white !important;
+  background: $keyboard__highlight--white;
+  border-bottom-width: 2px;
 }
 
 .piano-key-highlight--black {
-  background-color: $keyboard__highlight--black;
+  background: $keyboard__highlight--black;
+  border-bottom-width: 2px; 
+}
+
+.degree-display {
+  height: $degree-display-height;
+  padding: 10px 0;
 }

@@ -31,14 +31,28 @@ function () {
     this.domNode = document.getElementById(domID);
     this.domNameTextNode = this.domNode.querySelector('.keyboard__key-name');
     this.domFingeringTextNode = this.domNode.querySelector('.keyboard__fingering');
+    this.registerEventListeners();
   }
 
   _createClass(PianoKey, [{
-    key: "toggleHighlighted",
-    value: function toggleHighlighted() {
+    key: "registerEventListeners",
+    value: function registerEventListeners() {
+      this.domNode.addEventListener('mousedown', this.enableHighlighting.bind(this));
+      this.domNode.addEventListener('mouseup', this.disableHighlighting.bind(this));
+    }
+  }, {
+    key: "enableHighlighting",
+    value: function enableHighlighting() {
       var highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
-      console.log(highlightClassName);
-      this.domNode.classList.toggle(highlightClassName);
+      this.domNode.classList.add(highlightClassName);
+      this.setDisplayNameOfType('flat');
+    }
+  }, {
+    key: "disableHighlighting",
+    value: function disableHighlighting() {
+      var highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+      this.domNode.classList.remove(highlightClassName);
+      this.setCustomDisplayName('');
     }
   }, {
     key: "setCustomDisplayName",
@@ -55,7 +69,7 @@ function () {
     key: "setStandardDisplayName",
     value: function setStandardDisplayName() {
       // TODO
-      this.toggleHighlighted();
+      return this;
     }
   }]);
 

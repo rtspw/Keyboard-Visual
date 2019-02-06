@@ -22,12 +22,24 @@ class PianoKey {
     this.domNode = document.getElementById(domID);
     this.domNameTextNode = this.domNode.querySelector('.keyboard__key-name');
     this.domFingeringTextNode = this.domNode.querySelector('.keyboard__fingering');
+    this.registerEventListeners();
   }
 
-  toggleHighlighted() {
+  registerEventListeners() {
+    this.domNode.addEventListener('mousedown', this.enableHighlighting.bind(this));
+    this.domNode.addEventListener('mouseup', this.disableHighlighting.bind(this));
+  }
+
+  enableHighlighting() {
     const highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
-    console.log(highlightClassName);
-    this.domNode.classList.toggle(highlightClassName);
+    this.domNode.classList.add(highlightClassName);
+    this.setDisplayNameOfType('flat');
+  }
+
+  disableHighlighting() {
+    const highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+    this.domNode.classList.remove(highlightClassName);
+    this.setCustomDisplayName('');
   }
 
   setCustomDisplayName(name) {
@@ -41,7 +53,7 @@ class PianoKey {
 
   setStandardDisplayName() {
     // TODO
-    this.toggleHighlighted();
+    return this;
   }
 }
 
