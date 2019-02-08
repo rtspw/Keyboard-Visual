@@ -13,6 +13,9 @@ h1 {
   text-align: center;
   padding: 40px 0; }
 
+.hidden {
+  visibility: hidden; }
+
 .keyboard {
   width: 840px;
   margin: auto;
@@ -98,8 +101,30 @@ h1 {
   border-bottom-width: 2px; }
 
 .degree-display {
-  height: 50px;
-  padding: 10px 0; }
+  height: 30px;
+  padding: 5px 0;
+  font-size: 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: row; }
+  .degree-display__edge-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    border-bottom: 1px solid #9d9d9d; }
+  .degree-display__black-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    border-bottom: 5px solid #202229; }
+  .degree-display__middle-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    border-bottom: 1px solid #9d9d9d; }
 
 .scale-list {
   display: flex;

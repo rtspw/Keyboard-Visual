@@ -39,6 +39,8 @@ function () {
     value: function registerEventListeners() {
       this.domNode.addEventListener('mousedown', this.enableHighlighting.bind(this));
       this.domNode.addEventListener('mouseup', this.disableHighlighting.bind(this));
+      this.domNode.addEventListener('touchstart', this.enableHighlighting.bind(this));
+      this.domNode.addEventListener('touchend', this.disableHighlighting.bind(this));
     }
   }, {
     key: "enableHighlighting",

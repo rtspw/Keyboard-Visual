@@ -6,8 +6,6 @@ $white-key-width: 40px;
 $black-key-width: 20px;
 $black-key-height-ratio: 65%;
 
-$degree-display-height: 50px;
-
 .keyboard {
 
   width: $base-width;
@@ -132,9 +130,4 @@ $degree-display-height: 50px;
 .piano-key-highlight--black {
   background: $keyboard__highlight--black;
   border-bottom-width: 2px; 
-}
-
-.degree-display {
-  height: $degree-display-height;
-  padding: 10px 0;
 }

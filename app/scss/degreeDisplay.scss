@@ -1,0 +1,40 @@
+@import 'colors';
+
+$degree-display-height: 30px;
+
+@mixin centerChildren() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.degree-display {
+  height: $degree-display-height;
+  padding: 5px 0;
+
+  font-size: 0.75rem;
+  text-align: center;
+
+  display: flex;
+  flex-direction: row;
+
+
+  &__edge-key {
+    @include centerChildren();
+    width: 30px;
+    border-bottom: 1px solid rgb(157,157,157);
+  }
+  
+  &__black-key {
+    @include centerChildren();
+
+    width: 20px;
+    border-bottom: 5px solid $keyboard__base-black;
+  }
+
+  &__middle-key {
+    @include centerChildren();
+
+    width: 20px;
+    border-bottom: 1px solid rgb(157, 157, 157);
+  }
+}

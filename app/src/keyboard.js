@@ -41,7 +41,7 @@ class Keyboard {
 
   test() {
     this.keyNodes.forEach((key) => {
-      key.setDisplayNameOfType('');
+      key.setDisplayNameOfType('sharp');
     });
   }
 }

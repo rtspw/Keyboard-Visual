@@ -54,7 +54,7 @@ function () {
     key: "test",
     value: function test() {
       this.keyNodes.forEach(function (key) {
-        key.setDisplayNameOfType('');
+        key.setDisplayNameOfType('sharp');
       });
     }
   }]);
