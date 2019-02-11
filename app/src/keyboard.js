@@ -1,6 +1,6 @@
 'use strict';
 
-const PianoKey = require('./pianoKey');
+const PianoKey = require('./piano-key');
 const { range } = require('./util');
 
 const pianoKeyNames = ['c', 'c-sharp', 'd', 'd-sharp', 'e',

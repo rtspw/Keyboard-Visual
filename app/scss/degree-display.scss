@@ -7,6 +7,7 @@ $degree-display-height: 30px;
   align-items: center;
   justify-content: center;
 }
+
 .degree-display {
   height: $degree-display-height;
   padding: 5px 0;
@@ -16,25 +17,24 @@ $degree-display-height: 30px;
 
   display: flex;
   flex-direction: row;
+  flex-shrink: 0;
 
-
-  &__edge-key {
+  &__key {
     @include centerChildren();
-    width: 30px;
-    border-bottom: 1px solid rgb(157,157,157);
+    width: 20px;
+    flex-shrink: 0;
+    border-bottom: 1px solid $degree-display__white-key;
+  }
+
+  &__edge-key-left {
+    margin-left: 10px;
+  }
+
+  &__edge-key-right {
+    margin-right: 10px;
   }
   
   &__black-key {
-    @include centerChildren();
-
-    width: 20px;
-    border-bottom: 5px solid $keyboard__base-black;
-  }
-
-  &__middle-key {
-    @include centerChildren();
-
-    width: 20px;
-    border-bottom: 1px solid rgb(157, 157, 157);
+    border-bottom: 5px solid $degree-display__black-key;
   }
 }

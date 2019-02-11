@@ -1,6 +1,6 @@
 'use strict';
 
-const KeyName = require('./keyName');
+const KeyName = require('./key-name');
 
 function determineColor(domID) {
   return (domID.indexOf('sharp') !== -1) ? 'black' : 'white';
@@ -53,7 +53,7 @@ class PianoKey {
     this.domNameTextNode.textContent = alias;
   }
 
-  setStandardDisplayName() {
+  resetDisplayName() {
     // TODO
     return this;
   }

@@ -28,6 +28,9 @@ async function bundle() {
     entries: ['app/dist/index.js'],
     debug: true,
   }).bundle()
+    .on('error', (error) => {
+      console.log(error.message);
+    })
     .pipe(vinylSourceStream('bundle.js'))
     .pipe(vinylBuffer())
     .pipe(dest('app'));

@@ -6,7 +6,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var KeyName = require('./keyName');
+var KeyName = require('./key-name');
 
 function determineColor(domID) {
   return domID.indexOf('sharp') !== -1 ? 'black' : 'white';
@@ -68,8 +68,8 @@ function () {
       this.domNameTextNode.textContent = alias;
     }
   }, {
-    key: "setStandardDisplayName",
-    value: function setStandardDisplayName() {
+    key: "resetDisplayName",
+    value: function resetDisplayName() {
       // TODO
       return this;
     }
