@@ -8,53 +8,58 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var KeyName = require('./key-name');
 
+var NameSanitizer = require('./name-sanitizer');
+
 function determineColor(domID) {
   return domID.indexOf('sharp') !== -1 ? 'black' : 'white';
 }
 
 function determineNames(domID) {
-  var trimmedName = domID.slice(0, -1);
-  var reformattedName = trimmedName.replace('-sharp', '♯').toUpperCase();
-  var keyName = new KeyName(reformattedName);
+  var keyNameBaseName = NameSanitizer.convertPianoKeyDomIDToKeyNameBaseName(domID);
+  var keyName = new KeyName(keyNameBaseName);
   return keyName;
+}
+
+function determineOctave(domID) {
+  return domID.slice(-1);
+}
+
+function registerEventListeners(pianoKey) {
+  pianoKey.domNode.addEventListener('mousedown', pianoKey.enableHighlighting.bind(pianoKey));
+  document.addEventListener('mouseup', pianoKey.disableHighlighting.bind(pianoKey));
+  pianoKey.domNode.addEventListener('touchstart', pianoKey.enableHighlighting.bind(pianoKey));
+  pianoKey.domNode.addEventListener('touchend', pianoKey.disableHighlighting.bind(pianoKey));
 }
 
 var PianoKey =
 /*#__PURE__*/
 function () {
-  function PianoKey(domID) {
+  function PianoKey(domID, keyIndex) {
     _classCallCheck(this, PianoKey);
 
+    this.index = keyIndex;
     this.names = determineNames(domID);
     this.color = determineColor(domID);
-    this.octave = domID.slice(-1);
+    this.octave = determineOctave(domID);
     this.domNode = document.getElementById(domID);
     this.domNameTextNode = this.domNode.querySelector('.keyboard__key-name');
     this.domFingeringTextNode = this.domNode.querySelector('.keyboard__fingering');
-    this.registerEventListeners();
+    registerEventListeners(this);
   }
 
   _createClass(PianoKey, [{
-    key: "registerEventListeners",
-    value: function registerEventListeners() {
-      this.domNode.addEventListener('mousedown', this.enableHighlighting.bind(this));
-      this.domNode.addEventListener('mouseup', this.disableHighlighting.bind(this));
-      this.domNode.addEventListener('touchstart', this.enableHighlighting.bind(this));
-      this.domNode.addEventListener('touchend', this.disableHighlighting.bind(this));
-    }
-  }, {
     key: "enableHighlighting",
     value: function enableHighlighting() {
+      var isRootKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
       this.domNode.classList.add(highlightClassName);
-      this.setDisplayNameOfType('flat');
     }
   }, {
     key: "disableHighlighting",
     value: function disableHighlighting() {
+      var isRootKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
       this.domNode.classList.remove(highlightClassName);
-      this.setCustomDisplayName('');
     }
   }, {
     key: "setCustomDisplayName",
@@ -68,10 +73,25 @@ function () {
       this.domNameTextNode.textContent = alias;
     }
   }, {
+    key: "getCurrentName",
+    value: function getCurrentName() {
+      return this.domNameTextNode.textContent;
+    }
+  }, {
+    key: "getKeyIndex",
+    value: function getKeyIndex() {
+      return this.index;
+    }
+  }, {
     key: "resetDisplayName",
     value: function resetDisplayName() {
       // TODO
       return this;
+    }
+  }, {
+    key: "addNewEventListener",
+    value: function addNewEventListener(event, callback) {
+      this.domNode.addEventListener(event, callback);
     }
   }]);
 

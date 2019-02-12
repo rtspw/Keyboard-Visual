@@ -8,6 +8,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var PianoKey = require('./piano-key');
 
+var ScaleDisplay = require('./scale-display');
+
 var _require = require('./util'),
     range = _require.range;
 
@@ -24,20 +26,28 @@ function generateKeyNameIDs() {
   return keyNamesWithOctaves;
 }
 
-function getPianoKeyNodesUsingIDs() {
+function getPianoKeysUsingIDs() {
   var keyNameIDs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var pianoKeyNodes = [];
-  keyNameIDs.forEach(function (id) {
-    var pianoKey = new PianoKey(id);
+  keyNameIDs.forEach(function (id, keyIndex) {
+    var pianoKey = new PianoKey(id, keyIndex);
     pianoKeyNodes.push(pianoKey);
   });
   return pianoKeyNodes;
 }
 
-function getPianoKeyNodes() {
+function getPianoKeys() {
   var keyNameIDs = generateKeyNameIDs();
-  var pianoKeyNodes = getPianoKeyNodesUsingIDs(keyNameIDs);
-  return pianoKeyNodes;
+  var pianoKeys = getPianoKeysUsingIDs(keyNameIDs);
+  return pianoKeys;
+}
+
+function registerEventListeners(keyboard) {
+  keyboard.keys.forEach(function (key) {
+    key.addNewEventListener('click', function () {
+      keyboard.displayScaleFromIndex('major', key.getKeyIndex());
+    });
+  });
 }
 
 var Keyboard =
@@ -46,15 +56,32 @@ function () {
   function Keyboard() {
     _classCallCheck(this, Keyboard);
 
-    this.keyNodes = getPianoKeyNodes();
-    console.log(this.keyNodes);
+    this.keys = getPianoKeys();
+    console.log(this.keys);
+    registerEventListeners(this);
   }
 
   _createClass(Keyboard, [{
     key: "test",
     value: function test() {
-      this.keyNodes.forEach(function (key) {
+      this.keys.forEach(function (key) {
         key.setDisplayNameOfType('sharp');
+      });
+    }
+  }, {
+    key: "displayScaleFromIndex",
+    value: function displayScaleFromIndex(scale, index) {
+      var _this = this;
+
+      var rootKey = this.keys[index];
+      rootKey.enableHighlighting();
+      var iter = index;
+      ScaleDisplay.setText(rootKey.getCurrentName());
+      var pattern = [2, 2, 1, 2, 2, 2, 1];
+      pattern.forEach(function (increment) {
+        iter += increment;
+        var nextKey = _this.keys[iter];
+        nextKey.enableHighlighting();
       });
     }
   }]);

@@ -343,23 +343,33 @@
       </div>
     </section>
     
+    <section class="scale-display">
+      <div class="scale-display__text-panel">
+        <div></div>
+      </div>
+    </section>
 
     <section class="scale-list">
       <div class="scale-list__category">
         <div id="scale-list__common-scales">
-          <h2>Common Scales</h2>
-          <ul>
-            <li><button class="btn" id="btn-scale-major">Major</button></li>
+          <div class="scale-list__category-title unselectable">
+            <h2><span class="dropdown-arrow">⮞</span> Common Scales</h2>
+          </div>
+          
+          <ul class="scale-list__category-list scale-list__category-list--hidden">
+            <li><button class="btn btn--selected" id="btn-scale-major">Major</button></li>
             <li><button class="btn" id="btn-scale-minor">Minor</button></li>
-            <li><button class="btn btn--selected" id="btn-scale-harmonic-minor">Harmonic Minor</button></li>
+            <li><button class="btn" id="btn-scale-harmonic-minor">Harmonic Minor</button></li>
             <li><button class="btn" id="btn-scale-melodic-minor">Melodic Minor</button></li>
           </ul>
         </div>
       </div>
       <div class="scale-list__category">
         <div id="scale-list__common-chords">
-          <h2>Common Chords</h2>
-          <ul>
+          <div class="scale-list__category-title unselectable">
+            <h2><span class="dropdown-arrow">⮞</span> Common Chords</h2>
+          </div>
+          <ul class="scale-list__category-list scale-list__category-list--hidden">
             <li><button class="btn" id="btn-chord-major">Major (M)</button></li>
             <li><button class="btn" id="btn-chord-minor">Minor (m)</button></li>
             <li><button class="btn" id="btn-chord-diminished">Diminished (dim)</button></li>

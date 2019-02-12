@@ -2,37 +2,28 @@
 @import 'keyboard';
 @import 'degree-display';
 @import 'colors';
+@import 'scale-list';
 
-.scale-list {
-  margin: 90px auto;
-  display: flex;
-  flex-direction: row;
+.scale-display {
   max-width: 840px;
+  height: 40px;
+  margin: 30px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
 
-  &__category {
-    flex: 1;
+  &__text-panel {
+    width: 200px;
+    border-radius: 4px;
+    background: rgb(124, 129, 135);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto 20px;
+    font-size: 0.9rem;
   }
 }
-
-.btn {
-  background-color: white;
-  border: none;
-  border-bottom: 1px solid #777;
-  padding: 3px 0;
-  margin-top: 10px;
-
-  cursor: pointer;
-}
-
-.btn--selected {
-  font-weight: bold;
-  color: rgb(71, 0, 36);
-  border-color: rgb(119, 0, 60);
-  border-bottom-width: 5px;
-}
-
-
-
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

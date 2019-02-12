@@ -1,0 +1,63 @@
+@import 'colors';
+
+.btn {
+  background-color: white;
+  border: none;
+  padding: 3px 0;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.btn--selected {
+  color: rgb(71, 0, 36);
+  border-color: rgb(119, 0, 60);
+  border-bottom-width: 5px;
+  border-bottom: 3px solid rgb(71, 0, 36);
+}
+
+.dropdown-arrow {
+  display: inline-block;
+  font-weight: bold;
+  transition: transform 0.1s ease;
+}
+
+.dropdown-arrow--active {
+  transform: rotateZ(90deg);
+}
+
+
+.scale-list {
+  margin: 40px auto 100px auto;
+  display: flex;
+  flex-direction: row;
+  max-width: 840px;
+
+  @media only screen and (max-width: 930px) {
+    width: 90%;
+  }
+
+  &__category {
+    flex: 1;
+  }
+
+  &__category-title {
+    display: inline-block;
+    cursor: pointer;
+    &--active {
+
+    }
+  }
+
+  &__category-list {
+    transition: all 0.3s linear;
+
+    li {
+      padding-left: 23px;
+    }
+  }
+
+  &__category-list--hidden {
+    height: 0;
+    overflow: hidden;
+  }
+}

@@ -3,8 +3,10 @@ $base-black: #444;
 // Keyboard Colors
 $keyboard__top-border: #222;
 $keyboard__base-white: #fefefe;
+$keyboard__white-key-gradient: linear-gradient(180deg, rgba(133, 133, 133, 0.35) 0%, rgb(242, 243, 245) 2%, $keyboard__base-white 100%);
 $keyboard__base-white--hover: rgb(197, 255, 214);
 $keyboard__base-black: rgb(32, 34, 41);
+$keyboard__black-key-gradient: linear-gradient(130deg, $keyboard__base-black 0%, rgba(53,53,55,1) 50%, $keyboard__base-black 100%);
 $keyboard__base-black--hover: rgb(64, 124, 82);
 
 $keyboard__key-border-left--white: rgba(240, 240, 240, 0.3);
