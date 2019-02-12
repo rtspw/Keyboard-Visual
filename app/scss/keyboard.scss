@@ -125,9 +125,19 @@ $black-key-height-ratio: 65%;
 .piano-key-highlight--white {
   background: $keyboard__highlight--white;
   border-bottom-width: 2px;
+
+  &--root {
+    background: $keyboard__highlight--white--root;
+    border-bottom-width: 2px;
+  }
 }
 
 .piano-key-highlight--black {
   background: $keyboard__highlight--black;
   border-bottom-width: 2px; 
+
+  &--root {
+    background: $keyboard__highlight--black--root;
+    border-bottom-width: 2px;
+  }
 }

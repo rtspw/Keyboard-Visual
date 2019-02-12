@@ -3,9 +3,14 @@
 .btn {
   background-color: white;
   border: none;
+  font-family: inherit;
   padding: 3px 0;
   margin-top: 10px;
   cursor: pointer;
+
+  &:hover {
+    color: rgb(71, 0, 36);
+  }
 }
 
 .btn--selected {
@@ -13,6 +18,7 @@
   border-color: rgb(119, 0, 60);
   border-bottom-width: 5px;
   border-bottom: 3px solid rgb(71, 0, 36);
+  font-weight: bold;
 }
 
 .dropdown-arrow {
@@ -50,10 +56,10 @@
 
   &__category-list {
     transition: all 0.3s linear;
+  }
 
-    li {
-      padding-left: 23px;
-    }
+  li {
+    padding-left: 23px;
   }
 
   &__category-list--hidden {

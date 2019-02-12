@@ -9,4 +9,4 @@ var ScaleDisplay = require('./scale-display');
 ScaleController.init();
 ScaleDisplay.init();
 var test = new Keyboard();
-test.test();
+test.setDisplayNameForAllKeysOfType('standard');

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Cabin');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 @import 'colors';
 
 
@@ -11,9 +11,13 @@
 body {
   color: $base-black;
   font: {
-    family: 'Cabin', sans-serif;
+    family: 'Raleway', sans-serif;
     size: 18px;
   }
+}
+
+button {
+  font-family: 'Raleway', sans-serif;
 }
 
 h1 {

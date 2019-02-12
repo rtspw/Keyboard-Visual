@@ -11,7 +11,7 @@ var KeyName = require('./key-name');
 var NameSanitizer = require('./name-sanitizer');
 
 function determineColor(domID) {
-  return domID.indexOf('sharp') !== -1 ? 'black' : 'white';
+  return NameSanitizer.convertPianoKeyDomIDToColor(domID);
 }
 
 function determineNames(domID) {
@@ -21,13 +21,13 @@ function determineNames(domID) {
 }
 
 function determineOctave(domID) {
-  return domID.slice(-1);
+  return NameSanitizer.convertPianoKeyDomIDToOctaveNumber(domID);
 }
 
 function registerEventListeners(pianoKey) {
-  pianoKey.domNode.addEventListener('mousedown', pianoKey.enableHighlighting.bind(pianoKey));
-  document.addEventListener('mouseup', pianoKey.disableHighlighting.bind(pianoKey));
-  pianoKey.domNode.addEventListener('touchstart', pianoKey.enableHighlighting.bind(pianoKey));
+  pianoKey.domNode.addEventListener('mousedown', pianoKey.enableHighlighting.bind(pianoKey, false));
+  pianoKey.domNode.addEventListener('mouseup', pianoKey.disableHighlighting.bind(pianoKey));
+  pianoKey.domNode.addEventListener('touchstart', pianoKey.enableHighlighting.bind(pianoKey, false));
   pianoKey.domNode.addEventListener('touchend', pianoKey.disableHighlighting.bind(pianoKey));
 }
 
@@ -51,15 +51,25 @@ function () {
     key: "enableHighlighting",
     value: function enableHighlighting() {
       var isRootKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+      var highlightClassName = '';
+
+      if (isRootKey) {
+        highlightClassName = this.color === 'white' ? 'piano-key-highlight--white--root' : 'piano-key-highlight--black--root';
+      } else {
+        highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+      }
+
       this.domNode.classList.add(highlightClassName);
     }
   }, {
     key: "disableHighlighting",
     value: function disableHighlighting() {
-      var isRootKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
-      this.domNode.classList.remove(highlightClassName);
+      var _this = this;
+
+      var highlightingClassNames = ['piano-key-highlight--white--root', 'piano-key-highlight--black--root', 'piano-key-highlight--white', 'piano-key-highlight--black'];
+      highlightingClassNames.forEach(function (className) {
+        _this.domNode.classList.remove(className);
+      });
     }
   }, {
     key: "setCustomDisplayName",
@@ -83,15 +93,15 @@ function () {
       return this.index;
     }
   }, {
-    key: "resetDisplayName",
-    value: function resetDisplayName() {
-      // TODO
-      return this;
+    key: "getDomNode",
+    value: function getDomNode() {
+      return this.domNode;
     }
   }, {
-    key: "addNewEventListener",
-    value: function addNewEventListener(event, callback) {
-      this.domNode.addEventListener(event, callback);
+    key: "resetDisplayName",
+    value: function resetDisplayName() {
+      // TODO: Get default type from settings object
+      return this;
     }
   }]);
 

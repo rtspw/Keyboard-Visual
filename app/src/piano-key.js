@@ -4,7 +4,7 @@ const KeyName = require('./key-name');
 const NameSanitizer = require('./name-sanitizer');
 
 function determineColor(domID) {
-  return (domID.indexOf('sharp') !== -1) ? 'black' : 'white';
+  return NameSanitizer.convertPianoKeyDomIDToColor(domID);
 }
 
 function determineNames(domID) {
@@ -14,13 +14,13 @@ function determineNames(domID) {
 }
 
 function determineOctave(domID) {
-  return domID.slice(-1);
+  return NameSanitizer.convertPianoKeyDomIDToOctaveNumber(domID);
 }
 
 function registerEventListeners(pianoKey) {
-  pianoKey.domNode.addEventListener('mousedown', pianoKey.enableHighlighting.bind(pianoKey));
-  document.addEventListener('mouseup', pianoKey.disableHighlighting.bind(pianoKey));
-  pianoKey.domNode.addEventListener('touchstart', pianoKey.enableHighlighting.bind(pianoKey));
+  pianoKey.domNode.addEventListener('mousedown', pianoKey.enableHighlighting.bind(pianoKey, false));
+  pianoKey.domNode.addEventListener('mouseup', pianoKey.disableHighlighting.bind(pianoKey));
+  pianoKey.domNode.addEventListener('touchstart', pianoKey.enableHighlighting.bind(pianoKey, false));
   pianoKey.domNode.addEventListener('touchend', pianoKey.disableHighlighting.bind(pianoKey));
 }
 
@@ -38,13 +38,25 @@ class PianoKey {
   }
 
   enableHighlighting(isRootKey = false) {
-    const highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+    let highlightClassName = '';
+    if (isRootKey) {
+      highlightClassName = this.color === 'white' ? 'piano-key-highlight--white--root' : 'piano-key-highlight--black--root';
+    } else {
+      highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
+    }
     this.domNode.classList.add(highlightClassName);
   }
 
-  disableHighlighting(isRootKey = false) {
-    const highlightClassName = this.color === 'white' ? 'piano-key-highlight--white' : 'piano-key-highlight--black';
-    this.domNode.classList.remove(highlightClassName);
+  disableHighlighting() {
+    const highlightingClassNames = [
+      'piano-key-highlight--white--root',
+      'piano-key-highlight--black--root',
+      'piano-key-highlight--white',
+      'piano-key-highlight--black',
+    ];
+    highlightingClassNames.forEach((className) => {
+      this.domNode.classList.remove(className);
+    });
   }
 
   setCustomDisplayName(name) {
@@ -64,13 +76,13 @@ class PianoKey {
     return this.index;
   }
 
-  resetDisplayName() {
-    // TODO
-    return this;
+  getDomNode() {
+    return this.domNode;
   }
 
-  addNewEventListener(event, callback) {
-    this.domNode.addEventListener(event, callback);
+  resetDisplayName() {
+    // TODO: Get default type from settings object
+    return this;
   }
 }
 

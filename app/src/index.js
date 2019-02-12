@@ -8,5 +8,4 @@ ScaleController.init();
 ScaleDisplay.init();
 
 const test = new Keyboard();
-
-test.test();
+test.setDisplayNameForAllKeysOfType('standard');

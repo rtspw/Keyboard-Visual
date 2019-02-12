@@ -14,6 +14,16 @@ var NameSanitizer = {
     var trimmedName = pianoKeyDomID.slice(0, -1);
     var keyNameBaseName = trimmedName.replace('-sharp', '♯').toUpperCase();
     return keyNameBaseName;
+  },
+
+  /* 'c-sharp1' -> '1' */
+  convertPianoKeyDomIDToOctaveNumber: function convertPianoKeyDomIDToOctaveNumber(pianoKeyDomID) {
+    return pianoKeyDomID.slice(-1);
+  },
+
+  /* 'c-sharp1' -> 'black' */
+  convertPianoKeyDomIDToColor: function convertPianoKeyDomIDToColor(pianoKeyDomID) {
+    return pianoKeyDomID.indexOf('sharp') !== -1 ? 'black' : 'white';
   }
 };
 module.exports = NameSanitizer;

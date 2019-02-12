@@ -34,37 +34,51 @@ function getPianoKeys() {
 }
 
 function registerEventListeners(keyboard) {
-  keyboard.keys.forEach((key) => {
-    key.addNewEventListener('click', () => {
-      keyboard.displayScaleFromIndex('major', key.getKeyIndex());
-    });
+  keyboard.domNode.addEventListener('click', (event) => {
+    const eventSource = keyboard.keys.find(item => item.getDomNode() === event.target.closest('.keyboard__key'));
+    if (eventSource === undefined) return;
+    const index = eventSource.getKeyIndex();
+    keyboard.displayScaleStartingFromIndex('major', index);
   });
 }
 
 
 class Keyboard {
   constructor() {
+    this.domNode = document.querySelector('.keyboard');
     this.keys = getPianoKeys();
     console.log(this.keys);
     registerEventListeners(this);
   }
 
-  test() {
+  disableHighlightingForAllKeys() {
     this.keys.forEach((key) => {
-      key.setDisplayNameOfType('sharp');
+      key.disableHighlighting();
     });
   }
 
-  displayScaleFromIndex(scale, index) {
+  enableHighlightingForRootKey(index) {
     const rootKey = this.keys[index];
-    rootKey.enableHighlighting();
+    const isRootKey = true;
+    rootKey.enableHighlighting(isRootKey);
+  }
+
+  displayScaleStartingFromIndex(scale, index) {
+    this.disableHighlightingForAllKeys();
+    this.enableHighlightingForRootKey(index);
+    ScaleDisplay.setText(this.keys[index].getCurrentName());
     let iter = index;
-    ScaleDisplay.setText(rootKey.getCurrentName());
-    const pattern = [2, 2, 1, 2, 2, 2, 1];
+    const pattern = [2, 2, 1, 2, 2, 2];
     pattern.forEach((increment) => {
       iter += increment;
       const nextKey = this.keys[iter];
       nextKey.enableHighlighting();
+    });
+  }
+
+  setDisplayNameForAllKeysOfType(type) {
+    this.keys.forEach((key) => {
+      key.setDisplayNameOfType(type);
     });
   }
 }

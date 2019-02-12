@@ -17,6 +17,16 @@ const NameSanitizer = {
     return keyNameBaseName;
   },
 
+  /* 'c-sharp1' -> '1' */
+  convertPianoKeyDomIDToOctaveNumber(pianoKeyDomID) {
+    return pianoKeyDomID.slice(-1);
+  },
+
+  /* 'c-sharp1' -> 'black' */
+  convertPianoKeyDomIDToColor(pianoKeyDomID) {
+    return (pianoKeyDomID.indexOf('sharp') !== -1) ? 'black' : 'white';
+  },
+
 };
 
 module.exports = NameSanitizer;

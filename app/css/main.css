@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Cabin");
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 * {
   padding: 0;
   margin: 0;
@@ -6,8 +6,11 @@
 
 body {
   color: #444;
-  font-family: 'Cabin', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 18px; }
+
+button {
+  font-family: 'Raleway', sans-serif; }
 
 h1 {
   text-align: center;
@@ -103,15 +106,22 @@ ul {
 .piano-key-highlight--white {
   background: #cdfcdb;
   border-bottom-width: 2px; }
+  .piano-key-highlight--white--root {
+    background: #fcd8cd;
+    border-bottom-width: 2px; }
 
 .piano-key-highlight--black {
   background: #2f7443;
   border-bottom-width: 2px; }
+  .piano-key-highlight--black--root {
+    background: #74432f;
+    border-bottom-width: 2px; }
 
 .degree-display {
   height: 30px;
   padding: 5px 0;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
+  font-weight: bold;
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -133,15 +143,19 @@ ul {
 .btn {
   background-color: white;
   border: none;
+  font-family: inherit;
   padding: 3px 0;
   margin-top: 10px;
   cursor: pointer; }
+  .btn:hover {
+    color: #470024; }
 
 .btn--selected {
   color: #470024;
   border-color: #77003c;
   border-bottom-width: 5px;
-  border-bottom: 3px solid #470024; }
+  border-bottom: 3px solid #470024;
+  font-weight: bold; }
 
 .dropdown-arrow {
   display: inline-block;
@@ -166,8 +180,8 @@ ul {
     cursor: pointer; }
   .scale-list__category-list {
     transition: all 0.3s linear; }
-    .scale-list__category-list li {
-      padding-left: 23px; }
+  .scale-list li {
+    padding-left: 23px; }
   .scale-list__category-list--hidden {
     height: 0;
     overflow: hidden; }
@@ -182,8 +196,7 @@ ul {
   .scale-display__text-panel {
     width: 200px;
     border-radius: 4px;
-    background: #7c8187;
-    color: white;
+    background: rgba(236, 237, 240, 0.411);
     display: flex;
     justify-content: center;
     align-items: center;

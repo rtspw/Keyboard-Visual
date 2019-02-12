@@ -43,10 +43,13 @@ function getPianoKeys() {
 }
 
 function registerEventListeners(keyboard) {
-  keyboard.keys.forEach(function (key) {
-    key.addNewEventListener('click', function () {
-      keyboard.displayScaleFromIndex('major', key.getKeyIndex());
+  keyboard.domNode.addEventListener('click', function (event) {
+    var eventSource = keyboard.keys.find(function (item) {
+      return item.getDomNode() === event.target.closest('.keyboard__key');
     });
+    if (eventSource === undefined) return;
+    var index = eventSource.getKeyIndex();
+    keyboard.displayScaleStartingFromIndex('major', index);
   });
 }
 
@@ -56,32 +59,47 @@ function () {
   function Keyboard() {
     _classCallCheck(this, Keyboard);
 
+    this.domNode = document.querySelector('.keyboard');
     this.keys = getPianoKeys();
     console.log(this.keys);
     registerEventListeners(this);
   }
 
   _createClass(Keyboard, [{
-    key: "test",
-    value: function test() {
+    key: "disableHighlightingForAllKeys",
+    value: function disableHighlightingForAllKeys() {
       this.keys.forEach(function (key) {
-        key.setDisplayNameOfType('sharp');
+        key.disableHighlighting();
       });
     }
   }, {
-    key: "displayScaleFromIndex",
-    value: function displayScaleFromIndex(scale, index) {
+    key: "enableHighlightingForRootKey",
+    value: function enableHighlightingForRootKey(index) {
+      var rootKey = this.keys[index];
+      var isRootKey = true;
+      rootKey.enableHighlighting(isRootKey);
+    }
+  }, {
+    key: "displayScaleStartingFromIndex",
+    value: function displayScaleStartingFromIndex(scale, index) {
       var _this = this;
 
-      var rootKey = this.keys[index];
-      rootKey.enableHighlighting();
+      this.disableHighlightingForAllKeys();
+      this.enableHighlightingForRootKey(index);
+      ScaleDisplay.setText(this.keys[index].getCurrentName());
       var iter = index;
-      ScaleDisplay.setText(rootKey.getCurrentName());
-      var pattern = [2, 2, 1, 2, 2, 2, 1];
+      var pattern = [2, 2, 1, 2, 2, 2];
       pattern.forEach(function (increment) {
         iter += increment;
         var nextKey = _this.keys[iter];
         nextKey.enableHighlighting();
+      });
+    }
+  }, {
+    key: "setDisplayNameForAllKeysOfType",
+    value: function setDisplayNameForAllKeysOfType(type) {
+      this.keys.forEach(function (key) {
+        key.setDisplayNameOfType(type);
       });
     }
   }]);
