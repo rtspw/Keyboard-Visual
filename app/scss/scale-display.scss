@@ -1,0 +1,19 @@
+@import 'colors';
+
+.scale-display {
+  max-width: 840px;
+  height: 40px;
+  margin: 30px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+
+  &__text-panel {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto 20px;
+    font-size: 0.9rem;
+  }
+}

@@ -179,6 +179,7 @@ ul {
     display: inline-block;
     cursor: pointer; }
   .scale-list__category-list {
+    padding: 10px 0;
     transition: all 0.3s linear; }
   .scale-list li {
     padding-left: 23px; }
@@ -195,8 +196,6 @@ ul {
   align-items: stretch; }
   .scale-display__text-panel {
     width: 200px;
-    border-radius: 4px;
-    background: rgba(236, 237, 240, 0.411);
     display: flex;
     justify-content: center;
     align-items: center;

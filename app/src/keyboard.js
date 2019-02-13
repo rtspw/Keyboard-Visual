@@ -2,23 +2,26 @@
 
 const PianoKey = require('./piano-key');
 const ScaleDisplay = require('./scale-display');
+const ScaleController = require('./scale-controller');
+const ScaleDatabase = require('./scale-database');
 const { range } = require('./util');
 
 const pianoKeyNames = ['c', 'c-sharp', 'd', 'd-sharp', 'e',
   'f', 'f-sharp', 'g', 'g-sharp', 'a', 'a-sharp', 'b'];
 
-function generateKeyNameIDs() {
+function generateKeyNameDomIDs() {
   const keyNamesWithOctaves = [];
-  range(1, 3).forEach((i) => {
+  const NUM_OF_OCTAVES = 3;
+  range(1, NUM_OF_OCTAVES).forEach((octave) => {
     pianoKeyNames.forEach((name) => {
-      const nameWithOctave = name + i;
+      const nameWithOctave = name + octave;
       keyNamesWithOctaves.push(nameWithOctave);
     });
   });
   return keyNamesWithOctaves;
 }
 
-function getPianoKeysUsingIDs(keyNameIDs = []) {
+function getPianoKeysUsingDomIDs(keyNameIDs = []) {
   const pianoKeyNodes = [];
   keyNameIDs.forEach((id, keyIndex) => {
     const pianoKey = new PianoKey(id, keyIndex);
@@ -28,8 +31,8 @@ function getPianoKeysUsingIDs(keyNameIDs = []) {
 }
 
 function getPianoKeys() {
-  const keyNameIDs = generateKeyNameIDs();
-  const pianoKeys = getPianoKeysUsingIDs(keyNameIDs);
+  const keyNameIDs = generateKeyNameDomIDs();
+  const pianoKeys = getPianoKeysUsingDomIDs(keyNameIDs);
   return pianoKeys;
 }
 
@@ -38,7 +41,7 @@ function registerEventListeners(keyboard) {
     const eventSource = keyboard.keys.find(item => item.getDomNode() === event.target.closest('.keyboard__key'));
     if (eventSource === undefined) return;
     const index = eventSource.getKeyIndex();
-    keyboard.displayScaleStartingFromIndex('major', index);
+    keyboard.displayScaleStartingFromIndex(index);
   });
 }
 
@@ -47,7 +50,6 @@ class Keyboard {
   constructor() {
     this.domNode = document.querySelector('.keyboard');
     this.keys = getPianoKeys();
-    console.log(this.keys);
     registerEventListeners(this);
   }
 
@@ -57,21 +59,22 @@ class Keyboard {
     });
   }
 
-  enableHighlightingForRootKey(index) {
-    const rootKey = this.keys[index];
+  enableHighlightingForRootKey(indexOfRoot) {
+    const rootKey = this.keys[indexOfRoot];
     const isRootKey = true;
     rootKey.enableHighlighting(isRootKey);
   }
 
-  displayScaleStartingFromIndex(scale, index) {
+  displayScaleStartingFromIndex(index) {
+    const scalePattern = ScaleDatabase.getPatternOfSelectedScale();
+    if (scalePattern.length === 0) return;
     this.disableHighlightingForAllKeys();
     this.enableHighlightingForRootKey(index);
-    ScaleDisplay.setText(this.keys[index].getCurrentName());
     let iter = index;
-    const pattern = [2, 2, 1, 2, 2, 2];
-    pattern.forEach((increment) => {
+    scalePattern.forEach((increment) => {
       iter += increment;
       const nextKey = this.keys[iter];
+      if (nextKey === undefined) return;
       nextKey.enableHighlighting();
     });
   }

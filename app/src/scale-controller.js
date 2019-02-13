@@ -3,7 +3,7 @@
 const NameSanitizer = require('./name-sanitizer');
 const ScaleDisplay = require('./scale-display');
 
-let scaleState = 'scale-major';
+let scaleState = '';
 
 function getStateNameFromButtonID(buttonElem) {
   const buttonID = buttonElem.id;

@@ -18,29 +18,29 @@ async function transpileSass() {
 }
 
 async function transpileBabel() {
-  src('app/src/*.js')
+  src('app/dist/bundle.js')
     .pipe(babel())
-    .pipe(dest('app/dist'));
+    .pipe(dest('app'));
 }
 
 async function bundle() {
   browserify({
-    entries: ['app/dist/index.js'],
+    entries: ['app/src/index.js'],
     debug: true,
   }).bundle()
     .on('error', (error) => {
       console.log(error.message);
     })
-    .pipe(vinylSourceStream('bundle.js'))
+    .pipe(vinylSourceStream('dist/bundle.js'))
     .pipe(vinylBuffer())
     .pipe(dest('app'));
 }
 
 async function watchFiles() {
   watch('app/scss/*.scss', series('sass'));
-  watch('app/src/*.js', series(transpileBabel, bundle));
+  watch('app/src/*.js', series(bundle));
 }
 
 exports.sass = transpileSass;
-exports.js = series(transpileBabel, bundle);
+exports.js = series(bundle);
 exports.default = watchFiles;

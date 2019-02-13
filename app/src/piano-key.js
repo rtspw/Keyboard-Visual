@@ -3,6 +3,13 @@
 const KeyName = require('./key-name');
 const NameSanitizer = require('./name-sanitizer');
 
+const highlightingClassNames = [
+  'piano-key-highlight--white--root',
+  'piano-key-highlight--black--root',
+  'piano-key-highlight--white',
+  'piano-key-highlight--black',
+];
+
 function determineColor(domID) {
   return NameSanitizer.convertPianoKeyDomIDToColor(domID);
 }
@@ -17,11 +24,33 @@ function determineOctave(domID) {
   return NameSanitizer.convertPianoKeyDomIDToOctaveNumber(domID);
 }
 
+function addMouseListener(pianoKey) {
+  pianoKey.domNode.addEventListener('mousedown', () => {
+    if (pianoKey.isHighlighted()) return;
+    pianoKey.enableHighlighting(true);
+    function onMouseUp() {
+      pianoKey.disableHighlighting();
+      setTimeout(document.removeEventListener('mouseup', onMouseUp), 0);
+    }
+    document.addEventListener('mouseup', onMouseUp);
+  });
+}
+
+function addTouchListener(pianoKey) {
+  pianoKey.domNode.addEventListener('touchstart', () => {
+    if (pianoKey.isHighlighted()) return;
+    pianoKey.enableHighlighting(true);
+    function onTouchEnd() {
+      pianoKey.disableHighlighting();
+      setTimeout(document.removeEventListener('touchend', onTouchEnd), 0);
+    }
+    document.addEventListener('touchend', onTouchEnd);
+  });
+}
+
 function registerEventListeners(pianoKey) {
-  pianoKey.domNode.addEventListener('mousedown', pianoKey.enableHighlighting.bind(pianoKey, false));
-  pianoKey.domNode.addEventListener('mouseup', pianoKey.disableHighlighting.bind(pianoKey));
-  pianoKey.domNode.addEventListener('touchstart', pianoKey.enableHighlighting.bind(pianoKey, false));
-  pianoKey.domNode.addEventListener('touchend', pianoKey.disableHighlighting.bind(pianoKey));
+  addMouseListener(pianoKey);
+  addTouchListener(pianoKey);
 }
 
 
@@ -37,6 +66,16 @@ class PianoKey {
     registerEventListeners(this);
   }
 
+  isHighlighted() {
+    let isHighlighted = false;
+    highlightingClassNames.forEach((className) => {
+      if (this.domNode.classList.contains(className)) {
+        isHighlighted = true;
+      }
+    });
+    return isHighlighted;
+  }
+
   enableHighlighting(isRootKey = false) {
     let highlightClassName = '';
     if (isRootKey) {
@@ -48,12 +87,6 @@ class PianoKey {
   }
 
   disableHighlighting() {
-    const highlightingClassNames = [
-      'piano-key-highlight--white--root',
-      'piano-key-highlight--black--root',
-      'piano-key-highlight--white',
-      'piano-key-highlight--black',
-    ];
     highlightingClassNames.forEach((className) => {
       this.domNode.classList.remove(className);
     });
