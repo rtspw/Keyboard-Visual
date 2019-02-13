@@ -4,12 +4,6 @@ const ScaleController = require('./scale-controller');
 
 const scaleData = require('./data/scale-data');
 
-function getInfoOfScaleState(scaleState) {
-  const [chordOrScale, ...scaleTypeTokens] = scaleState.split('-');
-  const scaleType = scaleTypeTokens.join(' ');
-  return [chordOrScale, scaleType];
-}
-
 function getScalePattern(scaleType) {
   const pattern = scaleData.patterns.scales[scaleType];
   if (pattern === undefined) return [];
@@ -22,8 +16,9 @@ function getChordPattern(scaleType) {
   return pattern;
 }
 
-function getPattern(scaleInfo) {
-  const [chordOrScale, scaleType] = scaleInfo;
+function getPattern() {
+  const chordOrScale = ScaleController.getChordOrScale();
+  const scaleType = ScaleController.getScaleType();
   let pattern = [];
   if (chordOrScale === 'scale') {
     pattern = getScalePattern(scaleType);
@@ -35,15 +30,8 @@ function getPattern(scaleInfo) {
 
 
 class scaleDatabase {
-  static getPatternOf(scaleState = '') {
-    const scaleInfo = getInfoOfScaleState(scaleState);
-    const pattern = getPattern(scaleInfo);
-    return pattern;
-  }
-
   static getPatternOfSelectedScale() {
-    const scaleState = ScaleController.getScaleState();
-    const scalePattern = this.getPatternOf(scaleState);
+    const scalePattern = getPattern();
     return scalePattern;
   }
 }

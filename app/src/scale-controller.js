@@ -43,6 +43,12 @@ function registerEventListeners(scaleController) {
   });
 }
 
+function getInfoOfScaleState() {
+  const [chordOrScale, ...scaleTypeTokens] = scaleState.split('-');
+  const scaleType = scaleTypeTokens.join(' ');
+  return { chordOrScale, scaleType };
+}
+
 
 class scaleController {
   static init() {
@@ -51,8 +57,14 @@ class scaleController {
     registerEventListeners(this);
   }
 
-  static getScaleState() {
-    return scaleState;
+  static getChordOrScale() {
+    const { chordOrScale } = getInfoOfScaleState();
+    return chordOrScale;
+  }
+
+  static getScaleType() {
+    const { scaleType } = getInfoOfScaleState();
+    return scaleType;
   }
 }
 
