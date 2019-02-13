@@ -3,12 +3,7 @@
 const KeyName = require('./key-name');
 const NameSanitizer = require('./name-sanitizer');
 
-const highlightingClassNames = [
-  'piano-key-highlight--white--root',
-  'piano-key-highlight--black--root',
-  'piano-key-highlight--white',
-  'piano-key-highlight--black',
-];
+const highlightingClassNames = require('./data/highlighting-class-names');
 
 function determineColor(domID) {
   return NameSanitizer.convertPianoKeyDomIDToColor(domID);

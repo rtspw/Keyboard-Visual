@@ -2,25 +2,7 @@
 
 const ScaleController = require('./scale-controller');
 
-const data = {
-  patterns: {
-    scales: {
-      'major': [2, 2, 1, 2, 2, 2],
-      'minor': [2, 1, 2, 2, 1, 2],
-      'harmonic minor': [2, 1, 2, 2, 1, 3],
-      'melodic minor': [2, 1, 2, 2, 2, 2],
-
-    },
-    chords: {
-      'major': [4, 3],
-      'minor': [3, 4],
-      'diminished': [3, 3],
-      'augmented': [4, 4],
-      'suspended2': [2, 5],
-      'suspended4': [5, 2],
-    },
-  },
-};
+const scaleData = require('./data/scale-data');
 
 function getInfoOfScaleState(scaleState = '') {
   const [chordOrScale, ...scaleTypeTokens] = scaleState.split('-');
@@ -29,13 +11,13 @@ function getInfoOfScaleState(scaleState = '') {
 }
 
 function getScalePattern(scaleType) {
-  const pattern = data.patterns.scales[scaleType];
+  const pattern = scaleData.patterns.scales[scaleType];
   if (pattern === undefined) return [];
   return pattern;
 }
 
 function getChordPattern(scaleType) {
-  const pattern = data.patterns.chords[scaleType];
+  const pattern = scaleData.patterns.chords[scaleType];
   if (pattern === undefined) return [];
   return pattern;
 }
@@ -50,6 +32,7 @@ function getPattern(scaleInfo) {
   }
   return pattern;
 }
+
 
 class scaleDatabase {
   static getPatternOf(scaleState = '') {
