@@ -4,6 +4,7 @@ const PianoKey = require('./piano-key');
 const ScaleDisplay = require('./scale-display');
 const ScaleController = require('./scale-controller');
 const ScaleDatabase = require('./scale-database');
+const TimerManager = require('./timer-manager');
 const { range } = require('./util');
 
 const pianoKeyNames = ['c', 'c-sharp', 'd', 'd-sharp', 'e',
@@ -50,6 +51,7 @@ class Keyboard {
   constructor() {
     this.domNode = document.querySelector('.keyboard');
     this.keys = getPianoKeys();
+    this.timerManager = new TimerManager();
     registerEventListeners(this);
   }
 
@@ -68,14 +70,15 @@ class Keyboard {
   displayScaleStartingFromIndex(index) {
     const scalePattern = ScaleDatabase.getPatternOfSelectedScale();
     if (scalePattern.length === 0) return;
+    this.timerManager.clearAllTimers();
     this.disableHighlightingForAllKeys();
     this.enableHighlightingForRootKey(index);
     let iter = index;
-    scalePattern.forEach((increment) => {
+    scalePattern.forEach((increment, idx) => {
       iter += increment;
       const nextKey = this.keys[iter];
       if (nextKey === undefined) return;
-      nextKey.enableHighlighting();
+      this.timerManager.addTimer(nextKey.enableHighlighting.bind(nextKey), idx + 1);
     });
   }
 
