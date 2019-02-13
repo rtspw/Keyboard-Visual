@@ -21,7 +21,13 @@ function resetHighlightOnAllButtons(scaleController) {
   });
 }
 
-function registerEventListeners(scaleController) {
+function getInfoOfScaleState() {
+  const [chordOrScale, ...scaleTypeTokens] = scaleState.split('-');
+  const scaleType = scaleTypeTokens.join(' ');
+  return { chordOrScale, scaleType };
+}
+
+function addButtonListeners(scaleController) {
   scaleController.buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       scaleState = getStateNameFromButtonID(btn);
@@ -30,7 +36,9 @@ function registerEventListeners(scaleController) {
       ScaleDisplay.setText(scaleState);
     });
   });
+}
 
+function addDropdownTitleListeners(scaleController) {
   scaleController.categories.forEach((category) => {
     const categoryTitle = category.querySelector('.scale-list__category-title');
     const dropdownList = category.querySelector('.scale-list__category-list');
@@ -43,10 +51,9 @@ function registerEventListeners(scaleController) {
   });
 }
 
-function getInfoOfScaleState() {
-  const [chordOrScale, ...scaleTypeTokens] = scaleState.split('-');
-  const scaleType = scaleTypeTokens.join(' ');
-  return { chordOrScale, scaleType };
+function registerEventListeners(scaleController) {
+  addButtonListeners(scaleController);
+  addDropdownTitleListeners(scaleController);
 }
 
 
