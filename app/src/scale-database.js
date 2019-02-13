@@ -4,7 +4,7 @@ const ScaleController = require('./scale-controller');
 
 const scaleData = require('./data/scale-data');
 
-function getInfoOfScaleState(scaleState = '') {
+function getInfoOfScaleState(scaleState) {
   const [chordOrScale, ...scaleTypeTokens] = scaleState.split('-');
   const scaleType = scaleTypeTokens.join(' ');
   return [chordOrScale, scaleType];

@@ -80,6 +80,7 @@ ul {
     position: relative; }
   .keyboard__key-name {
     font-size: 0.7rem;
+    font-weight: bold;
     padding-top: 10px;
     color: #222; }
     .keyboard__key-name--left-align {

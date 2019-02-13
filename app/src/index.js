@@ -7,5 +7,5 @@ const ScaleDisplay = require('./scale-display');
 ScaleController.init();
 ScaleDisplay.init();
 
-const test = new Keyboard();
-test.setDisplayNameForAllKeysOfType('standard');
+const mainKeyboard = new Keyboard();
+mainKeyboard.setDisplayNameForAllKeysOfType('standard');
