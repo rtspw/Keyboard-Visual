@@ -1,21 +1,19 @@
 'use strict';
 
 const PianoKey = require('./piano-key');
-const ScaleDisplay = require('./scale-display');
-const ScaleController = require('./scale-controller');
 const ScaleDatabase = require('./scale-database');
 const TimerManager = require('./timer-manager');
-const { range } = require('./util');
+const DegreeDisplay = require('./degree-display');
 
-const pianoKeyNames = ['c', 'c-sharp', 'd', 'd-sharp', 'e',
-  'f', 'f-sharp', 'g', 'g-sharp', 'a', 'a-sharp', 'b'];
+const { range } = require('./util');
+const pianoKeyBaseIDs = require('./data/piano-key-base-ids');
 
 function generateKeyNameDomIDs() {
   const keyNamesWithOctaves = [];
   const NUM_OF_OCTAVES = 3;
   range(1, NUM_OF_OCTAVES).forEach((octave) => {
-    pianoKeyNames.forEach((name) => {
-      const nameWithOctave = name + octave;
+    pianoKeyBaseIDs.forEach((baseID) => {
+      const nameWithOctave = baseID + octave;
       keyNamesWithOctaves.push(nameWithOctave);
     });
   });
@@ -72,7 +70,11 @@ function HighlightingPattern(scalePattern) {
         this.index += increment;
         const nextKey = this.keys[this.index];
         if (nextKey === undefined) return;
-        this.timerManager.addTimer(nextKey.enableHighlighting.bind(nextKey), idx + 1);
+        if (this.timerManager === undefined) {
+          nextKey.enableHighlighting();
+        } else {
+          this.timerManager.addTimer(nextKey.enableHighlighting.bind(nextKey), idx + 1);
+        }
       });
     },
   };
@@ -83,6 +85,7 @@ class Keyboard {
   constructor() {
     this.domNode = document.querySelector('.keyboard');
     this.keys = getPianoKeys();
+    this.degreeDisplay = new DegreeDisplay();
     this.timerManager = new TimerManager();
     registerEventListeners(this);
   }
