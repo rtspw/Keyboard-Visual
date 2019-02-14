@@ -21,7 +21,7 @@ class DegreeTile {
 
   setDegreeNumber(offsetFromRootNote) {
     const chordOrScale = ScaleController.getChordOrScale();
-    const degreeType = 'movableDoFlat'; // Settings.getDegreeType();
+    const degreeType = 'standard'; // Settings.getDegreeType();
     let degree = '';
     if (chordOrScale === 'scale') {
       const scaleSet = offsetToDegreeSets.scale[degreeType];

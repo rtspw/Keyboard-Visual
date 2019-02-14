@@ -9,15 +9,14 @@
   cursor: pointer;
 
   &:hover {
-    color: rgb(71, 0, 36);
+    color: $scale-list__btn--hover;
   }
 }
 
 .btn--selected {
-  color: rgb(71, 0, 36);
-  border-color: rgb(119, 0, 60);
+  color: $scale-list__btn--selected;
   border-bottom-width: 5px;
-  border-bottom: 3px solid rgb(71, 0, 36);
+  border-bottom: 3px solid $scale-list__btn-border--selected;
   font-weight: bold;
 }
 

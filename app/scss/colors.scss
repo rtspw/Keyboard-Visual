@@ -4,10 +4,8 @@ $base-black: #444;
 $keyboard__top-border: #222;
 $keyboard__base-white: #fefefe;
 $keyboard__white-key-gradient: linear-gradient(180deg, rgba(133, 133, 133, 0.35) 0%, rgb(242, 243, 245) 2%, $keyboard__base-white 100%);
-$keyboard__base-white--hover: rgb(197, 255, 214);
 $keyboard__base-black: rgb(32, 34, 41);
 $keyboard__black-key-gradient: linear-gradient(130deg, $keyboard__base-black 0%, rgba(53,53,55,1) 50%, $keyboard__base-black 100%);
-$keyboard__base-black--hover: rgb(64, 124, 82);
 
 $keyboard__key-border-left--white: rgba(240, 240, 240, 0.3);
 $keyboard__key-border-bottom--white: rgb(223, 223, 223);
@@ -20,14 +18,18 @@ $keyboard__key-border-right--black: rgba(35, 35, 37, 0.5);
 $keyboard__text-white: #222;
 $keyboard__text-black: #fefefe;
 
-$keyboard__highlight--white: rgb(205, 252, 219);
-$keyboard__highlight--black: rgb(47, 116, 67);
-$keyboard__highlight--white--root: rgb(252, 216, 205);
-$keyboard__highlight--black--root: rgb(116, 67, 47);
+$keyboard__highlight--white: rgb(252, 216, 205);
+$keyboard__highlight--black: rgb(156, 56, 17);
+$keyboard__highlight--white--root: rgb(248, 206, 217);
+$keyboard__highlight--black--root: rgb(114, 51, 67);
 
 
 // Degree Display
 $degree-display__white-key: rgb(157,157,157);
 $degree-display__black-key: rgb(58, 60, 70);
         
-      
+
+// Scale List
+$scale-list__btn--hover: rgb(71, 0, 36);
+$scale-list__btn--selected: rgb(71, 0, 36);
+$scale-list__btn-border--selected: rgb(71, 0, 36);

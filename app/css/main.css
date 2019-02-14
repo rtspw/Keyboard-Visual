@@ -105,17 +105,17 @@ ul {
       color: #fefefe; }
 
 .piano-key-highlight--white {
-  background: #cdfcdb;
+  background: #fcd8cd;
   border-bottom-width: 2px; }
   .piano-key-highlight--white--root {
-    background: #fcd8cd;
+    background: #f8ced9;
     border-bottom-width: 2px; }
 
 .piano-key-highlight--black {
-  background: #2f7443;
+  background: #9c3811;
   border-bottom-width: 2px; }
   .piano-key-highlight--black--root {
-    background: #74432f;
+    background: #723343;
     border-bottom-width: 2px; }
 
 .degree-display {
@@ -153,7 +153,6 @@ ul {
 
 .btn--selected {
   color: #470024;
-  border-color: #77003c;
   border-bottom-width: 5px;
   border-bottom: 3px solid #470024;
   font-weight: bold; }

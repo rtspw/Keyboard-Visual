@@ -9,7 +9,7 @@ ScaleController.init();
 ScaleDisplay.init();
 
 const mainKeyboard = new Keyboard();
-mainKeyboard.setDisplayNameForAllKeysOfType('fixedDoFlat');
+mainKeyboard.setDisplayNameForAllKeysOfType('standard');
 
 const degreeDisplay = new DegreeDisplay();
 degreeDisplay.enableHiddenForAllTiles();
