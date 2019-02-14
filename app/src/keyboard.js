@@ -5,7 +5,7 @@ const ScaleDatabase = require('./scale-database');
 const TimerManager = require('./timer-manager');
 const DegreeDisplay = require('./degree-display');
 
-const { range } = require('./util');
+const { range, usePattern } = require('./util');
 const pianoKeyBaseIDs = require('./data/piano-key-base-ids');
 
 function generateKeyNameDomIDs() {
@@ -41,43 +41,8 @@ function registerEventListeners(keyboard) {
     if (eventSource === undefined) return;
     const index = eventSource.getKeyIndex();
     keyboard.enableHighlightingForScaleStartingFromIndex(index);
+    keyboard.degreeDisplay.setDisplayedTilesForScaleStartingFromIndex(index);
   });
-}
-
-function enableHighlightingForRootKey() {
-  const rootKey = this.keys[this.index];
-  const isRootKey = true;
-  rootKey.enableHighlighting(isRootKey);
-}
-
-function HighlightingPattern(scalePattern) {
-  return {
-    toKeys(keys) {
-      this.keys = keys;
-      return this;
-    },
-    fromIndex(index) {
-      this.index = index;
-      return this;
-    },
-    withTimer(timerManager) {
-      this.timerManager = timerManager;
-      return this;
-    },
-    enable() {
-      enableHighlightingForRootKey.bind(this)();
-      scalePattern.forEach((increment, idx) => {
-        this.index += increment;
-        const nextKey = this.keys[this.index];
-        if (nextKey === undefined) return;
-        if (this.timerManager === undefined) {
-          nextKey.enableHighlighting();
-        } else {
-          this.timerManager.addTimer(nextKey.enableHighlighting.bind(nextKey), idx + 1);
-        }
-      });
-    },
-  };
 }
 
 
@@ -101,11 +66,17 @@ class Keyboard {
     if (scalePattern.length === 0) return;
     this.timerManager.clearAllTimers();
     this.disableHighlightingForAllKeys();
-    HighlightingPattern(scalePattern)
-      .toKeys(this.keys)
+    usePattern(scalePattern)
+      .forItems(this.keys)
       .fromIndex(index)
       .withTimer(this.timerManager)
-      .enable();
+      .runForFirstItem((rootKey) => {
+        const isRootKey = true;
+        rootKey.enableHighlighting(isRootKey);
+      })
+      .run((key) => {
+        key.enableHighlighting();
+      });
   }
 
   setDisplayNameForAllKeysOfType(type) {

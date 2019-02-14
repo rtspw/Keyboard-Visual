@@ -21,14 +21,22 @@ class DegreeTile {
 
   setDegreeNumber(offsetFromRootNote) {
     const chordOrScale = ScaleController.getChordOrScale();
-    const degreeType = 'standard'; // Settings.getDegreeType();
+    const degreeType = 'movableDoFlat'; // Settings.getDegreeType();
     let degree = '';
     if (chordOrScale === 'scale') {
-      degree = offsetToDegreeSets.scale[degreeType][offsetFromRootNote];
+      const scaleSet = offsetToDegreeSets.scale[degreeType];
+      if (scaleSet === undefined) return;
+      degree = scaleSet[offsetFromRootNote];
     } else if (chordOrScale === 'chord') {
-      degree = offsetToDegreeSets.chord[degreeType][offsetFromRootNote];
+      const chordSet = offsetToDegreeSets.chord[degreeType];
+      if (chordSet === undefined) return;
+      degree = chordSet[offsetFromRootNote];
     }
-    this.domTextNode.textContent = degree;
+    this.setDegreeText(degree);
+  }
+
+  setDegreeText(text) {
+    this.domTextNode.textContent = text;
   }
 }
 
