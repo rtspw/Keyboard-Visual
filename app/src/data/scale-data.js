@@ -14,8 +14,8 @@ const data = {
       'minor': [3, 4],
       'diminished': [3, 3],
       'augmented': [4, 4],
-      'suspended2': [2, 5],
-      'suspended4': [5, 2],
+      'suspended 2': [2, 5],
+      'suspended 4': [5, 2],
     },
   },
 };

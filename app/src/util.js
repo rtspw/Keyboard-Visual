@@ -10,6 +10,17 @@ function range(start, end) {
 }
 
 /**
+ * Sets the first letter of each word in a string to uppercase
+ * @param {string} str
+ */
+function toTitleCase(str) {
+  const strInTitleCase = str.split(' ').map((word) => {
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
+  }).join(' ');
+  return strInTitleCase;
+}
+
+/**
  * Runs a callback for each item of items, iterating using increments from the patternArray
  * @param {Array} patternArray
  * @param {Array} items
@@ -63,4 +74,4 @@ function usePattern(patternArray) {
   };
 }
 
-module.exports = { range, usePattern };
+module.exports = { range, toTitleCase, usePattern };

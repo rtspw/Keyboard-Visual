@@ -2,6 +2,7 @@
 
 const NameSanitizer = require('./name-sanitizer');
 const ScaleDisplay = require('./scale-display');
+const { toTitleCase } = require('./util');
 
 let scaleState = '';
 
@@ -33,7 +34,8 @@ function addButtonListeners(scaleController) {
       scaleState = getStateNameFromButtonID(btn);
       resetHighlightOnAllButtons(scaleController);
       addHighlightOnButton(btn);
-      ScaleDisplay.setText(scaleState);
+      const formattedScaleName = scaleController.getFormattedScaleName();
+      ScaleDisplay.setText(formattedScaleName);
     });
   });
 }
@@ -72,6 +74,13 @@ class scaleController {
   static getScaleType() {
     const { scaleType } = getInfoOfScaleState();
     return scaleType;
+  }
+
+  static getFormattedScaleName() {
+    const { chordOrScale, scaleType } = getInfoOfScaleState();
+    const lowercaseName = `${scaleType} ${chordOrScale}`;
+    const titlecaseName = toTitleCase(lowercaseName);
+    return titlecaseName;
   }
 }
 

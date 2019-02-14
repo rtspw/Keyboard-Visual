@@ -76,6 +76,7 @@ class Keyboard {
       })
       .run((key) => {
         key.enableHighlighting();
+        key.playAudio();
       });
   }
 

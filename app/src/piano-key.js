@@ -2,6 +2,7 @@
 
 const KeyName = require('./key-name');
 const NameSanitizer = require('./name-sanitizer');
+const PianoAudioController = require('./piano-audio-controller');
 
 const highlightingClassNames = require('./data/highlighting-class-names');
 
@@ -20,7 +21,8 @@ function determineOctave(domID) {
 }
 
 function addMouseListener(pianoKey) {
-  pianoKey.domNode.addEventListener('mousedown', () => {
+  pianoKey.domNode.addEventListener('mousedown', () => {1
+    pianoKey.playAudio();
     if (pianoKey.isHighlighted()) return;
     pianoKey.enableHighlighting(true);
     function onMouseUp() {
@@ -33,6 +35,7 @@ function addMouseListener(pianoKey) {
 
 function addTouchListener(pianoKey) {
   pianoKey.domNode.addEventListener('touchstart', () => {
+    pianoKey.playAudio();
     if (pianoKey.isHighlighted()) return;
     pianoKey.enableHighlighting(true);
     function onTouchEnd() {
@@ -94,6 +97,10 @@ class PianoKey {
   setDisplayNameOfType(type) {
     const alias = this.names.getAliasOfType(type);
     this.domNameTextNode.textContent = alias;
+  }
+
+  playAudio() {
+    PianoAudioController.playKeyAtIndex(this.index);
   }
 
   getCurrentName() {
