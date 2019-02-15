@@ -12,3 +12,77 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.settings {
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba(246, 246, 246, 0.9);
+  z-index: 100;
+
+  &__main-title {
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  &__section {
+    display: flex;
+    padding: 15px 0;
+    color: rgb(105, 109, 122);
+  }
+
+  &__section-title {
+    min-width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex: 1;
+
+    &-control {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &-button {
+      height: 30px;
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      width: 30px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(71, 0, 36, 0.5);
+      color: white;
+
+      &--up {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+
+      &--down {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+    }
+
+
+    &-display {
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+    }
+  }
+}

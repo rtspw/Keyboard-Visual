@@ -12,6 +12,14 @@ body {
 button {
   font-family: 'Raleway', sans-serif; }
 
+hr {
+  background: #444;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(2, 0, 36, 0) 0%, rgba(34, 34, 56, 0.5) 50%, rgba(25, 64, 71, 0) 100%);
+  border: none;
+  width: 90%;
+  margin: 0 auto; }
+
 h1 {
   text-align: center;
   padding: 40px 0; }
@@ -20,6 +28,13 @@ h2 {
   font-size: 1.2rem;
   letter-spacing: 1px;
   font-weight: 400; }
+
+h3 {
+  font-size: 1rem; }
+
+h4 {
+  font-weight: normal;
+  font-size: 0.9rem; }
 
 ul {
   list-style: none; }
@@ -56,18 +71,18 @@ ul {
     transition: border-bottom-width 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
     cursor: pointer; }
     .keyboard__key--white {
-      border-bottom: 5px solid #dfdfdf;
+      border-bottom: 5px solid rgba(170, 170, 170, 0.3);
       border-left: 2px solid rgba(240, 240, 240, 0.3);
-      border-right: 2px solid #c5c5c5;
+      border-right: 2px solid rgba(100, 100, 100, 0.3);
       height: 225px;
       width: 40px;
       position: relative;
       background: #fefefe;
       background: linear-gradient(180deg, rgba(133, 133, 133, 0.35) 0%, #f2f3f5 2%, #fefefe 100%); }
     .keyboard__key--black {
-      border-bottom: 5px solid rgba(54, 55, 58, 0.4);
-      border-left: 2px solid rgba(110, 110, 110, 0.4);
-      border-right: 2px solid rgba(35, 35, 37, 0.5);
+      border-bottom: 5px solid rgba(150, 150, 150, 0.1);
+      border-left: 2px solid rgba(230, 230, 230, 0.2);
+      border-right: 2px solid rgba(50, 50, 50, 0.2);
       height: 65%;
       width: 20px;
       left: -10px;
@@ -208,3 +223,57 @@ ul {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
+
+.settings {
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba(246, 246, 246, 0.9);
+  z-index: 100; }
+  .settings__main-title {
+    padding: 20px 0;
+    text-align: center; }
+  .settings__section {
+    display: flex;
+    padding: 15px 0;
+    color: #696d7a; }
+  .settings__section-title {
+    min-width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .settings__volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex: 1; }
+    .settings__volume-control {
+      display: flex;
+      flex-direction: row; }
+    .settings__volume-button {
+      height: 30px;
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      width: 30px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(71, 0, 36, 0.5);
+      color: white; }
+      .settings__volume-button--up {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px; }
+      .settings__volume-button--down {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px; }
+    .settings__volume-display {
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white; }
