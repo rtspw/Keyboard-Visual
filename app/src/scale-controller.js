@@ -2,6 +2,8 @@
 
 const NameSanitizer = require('./name-sanitizer');
 const ScaleDisplay = require('./scale-display');
+const ScaleListCategory = require('./scale-list-category');
+
 const { toTitleCase } = require('./util');
 
 let scaleState = '';
@@ -28,6 +30,16 @@ function getInfoOfScaleState() {
   return { chordOrScale, scaleType };
 }
 
+function getScaleListCategories() {
+  const categoryNodes = [...document.getElementsByClassName('scale-list__category')];
+  const categories = [];
+  categoryNodes.forEach((categoryNode) => {
+    const category = new ScaleListCategory(categoryNode);
+    categories.push(category);
+  });
+  return categories;
+}
+
 function addButtonListeners(scaleController) {
   scaleController.buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -40,29 +52,16 @@ function addButtonListeners(scaleController) {
   });
 }
 
-function addDropdownTitleListeners(scaleController) {
-  scaleController.categories.forEach((category) => {
-    const categoryTitle = category.querySelector('.scale-list__category-title');
-    const dropdownList = category.querySelector('.scale-list__category-list');
-    const dropdownArrow = category.querySelector('.dropdown-arrow');
-    categoryTitle.addEventListener('click', () => {
-      categoryTitle.classList.toggle('scale-list__category-title--active');
-      dropdownList.classList.toggle('scale-list__category-list--hidden');
-      dropdownArrow.classList.toggle('dropdown-arrow--active');
-    });
-  });
-}
-
 function registerEventListeners(scaleController) {
   addButtonListeners(scaleController);
-  addDropdownTitleListeners(scaleController);
 }
 
 
 class scaleController {
   static init() {
     this.buttons = [...document.getElementsByClassName('btn')];
-    this.categories = [...document.getElementsByClassName('scale-list__category')];
+    this.categories = getScaleListCategories();
+    this.enableVisibilityForAllCategories();
     registerEventListeners(this);
   }
 
@@ -81,6 +80,18 @@ class scaleController {
     const lowercaseName = `${scaleType} ${chordOrScale}`;
     const titlecaseName = toTitleCase(lowercaseName);
     return titlecaseName;
+  }
+
+  static expandAllCategories() {
+    this.categories.forEach((category) => {
+      category.expandMenu();
+    });
+  }
+
+  static collapseAllCategories() {
+    this.categories.forEach((category) => {
+      category.collapseMenu();
+    });
   }
 }
 
