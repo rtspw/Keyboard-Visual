@@ -1,26 +1,17 @@
 'use strict';
 
-const NameSanitizer = require('./name-sanitizer');
 const ScaleDisplay = require('./scale-display');
 const ScaleListCategory = require('./scale-list-category');
+const ScaleListButton = require('./scale-list-button');
 
 const { toTitleCase } = require('./util');
 
 let scaleState = '';
 
-function getStateNameFromButtonID(buttonElem) {
-  const buttonID = buttonElem.id;
-  const stateName = NameSanitizer.convertButtonIDToStateName(buttonID);
-  return stateName;
-}
-
-function addHighlightOnButton(btn) {
-  btn.classList.add('btn--selected');
-}
 
 function resetHighlightOnAllButtons(scaleController) {
   scaleController.buttons.forEach((btn) => {
-    btn.classList.remove('btn--selected');
+    btn.disableHighlighting();
   });
 }
 
@@ -40,12 +31,22 @@ function getScaleListCategories() {
   return categories;
 }
 
+function getScaleListButtons() {
+  const buttonNodes = [...document.getElementsByClassName('btn')];
+  const scaleListButtons = [];
+  buttonNodes.forEach((buttonNode) => {
+    const scaleListButton = new ScaleListButton(buttonNode);
+    scaleListButtons.push(scaleListButton);
+  });
+  return scaleListButtons;
+}
+
 function addButtonListeners(scaleController) {
   scaleController.buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      scaleState = getStateNameFromButtonID(btn);
+    btn.addClickListener(() => {
       resetHighlightOnAllButtons(scaleController);
-      addHighlightOnButton(btn);
+      btn.enableHighlighting();
+      scaleState = btn.getStateName();
       const formattedScaleName = scaleController.getFormattedScaleName();
       ScaleDisplay.setText(formattedScaleName);
     });
@@ -59,9 +60,9 @@ function registerEventListeners(scaleController) {
 
 class scaleController {
   static init() {
-    this.buttons = [...document.getElementsByClassName('btn')];
+    this.buttons = getScaleListButtons();
     this.categories = getScaleListCategories();
-    this.enableVisibilityForAllCategories();
+    this.expandAllCategories();
     registerEventListeners(this);
   }
 
